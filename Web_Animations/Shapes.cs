@@ -13,7 +13,7 @@ class Shapes
     public Ellipse CreateEllipse(double radius, double X, double Y, Brush color)
     {
         Random location = new Random();
-        int l = location.Next(-50, 50);
+        int l = location.Next(-10, 10);
 
         Ellipse ellipse = new Ellipse { Width = radius, Height = radius, Fill = color };
         double left = X - (radius / 2) + l;

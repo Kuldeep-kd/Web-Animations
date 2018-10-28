@@ -25,8 +25,13 @@ namespace Web_Animations
         public MainWindow()
         {
             InitializeComponent();
+            timer.Start();
         }
 
+        Timer timer = new Timer(2000) { AutoReset = true, Enabled = true };
+        Shapes shape = new Shapes();
+        Random Rand_Color = new Random();
+        Random Rand_Radius = new Random();
         private static Animations anims = new Animations();
         private static double radius = 100;
         private static int index;
@@ -41,11 +46,10 @@ namespace Web_Animations
 
         private new void MouseMove(object sender, MouseEventArgs e)
         {
-            Shapes shape = new Shapes();
+
+
             Ellipse x = new Ellipse();
-            
-            Random Rand_Color = new Random();
-            Random Rand_Radius = new Random();
+
             index = Rand_Color.Next(3);
             radius = Rand_Radius.Next(100);
 
@@ -53,18 +57,33 @@ namespace Web_Animations
             c.Children.Add(x);
             anims.Animate(x);
 
-            Timer t = new Timer(4000);
-            t.AutoReset = false;
+            Timer t = new Timer(3000) { AutoReset = false };
             t.Start();
 
-            t.Elapsed += (object s, ElapsedEventArgs ee) => {
-                this.Dispatcher.Invoke(() =>
+            t.Elapsed += (object s, ElapsedEventArgs ee) =>
+            {
+                try
                 {
-                    try { c.Children.Remove(x); }
-                    catch (Exception) { }
-                });
+                    this.Dispatcher.Invoke(() =>
+                    {
+
+                        c.Children.Remove(x);
+
+                    });
+                }
+                catch (Exception w) { }
+
             };
 
+
+
+            //timer.Elapsed += (object s, ElapsedEventArgs args) =>
+            //{
+            //    this.Dispatcher.Invoke(() => { Draw(sender,e); });
+            //};
+
         }
+
+
     }
 }
