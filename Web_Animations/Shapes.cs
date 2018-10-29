@@ -1,25 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using System.Collections.Generic;
 
 class Shapes
 {
-    public Ellipse CreateEllipse(double radius, double X, double Y, Brush color)
-    {
-        Random location = new Random();
-        int l = location.Next(-10, 10);
 
-        Ellipse ellipse = new Ellipse { Width = radius, Height = radius, Fill = color };
+    private Random rnd = new Random();
+    private double radius;
+    private int index, l;
+    public int MaxRadius { get; set; } = 40;
+    private readonly List<Brush> Color = new List<Brush>()
+            {
+                Brushes.DeepSkyBlue,
+                Brushes.Red,
+                Brushes.Wheat,
+                Brushes.Turquoise,
+                Brushes.RoyalBlue,
+                Brushes.Yellow,
+                Brushes.Coral,
+                Brushes.Violet
+            };
+    
+
+    public Ellipse CreateEllipse(double X, double Y)
+    {
+        index = rnd.Next(6);
+        radius = rnd.Next(1, MaxRadius);
+        
+        l = rnd.Next(-15, 15);
+
+        Ellipse ellipse = new Ellipse { Width = radius, Height = radius, Fill = Color[index] };
         double left = X - (radius / 2) + l;
         double top  = Y - (radius / 2) + l;
-        ellipse.Opacity = 0.8;
-        ellipse.Margin = new Thickness(left, top, 0, 0);
+        ellipse.Opacity = 0.4;
+        ellipse.Margin = new Thickness(left, top, top, left);
         return ellipse;
     }
 }

@@ -6,9 +6,43 @@
         xmlns:local="clr-namespace:Web_Animations"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="400">
-    <Canvas Name="c" Background="Black" MouseMove="MouseMove" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <WrapPanel Canvas.Right="0" Canvas.Bottom="0">
-            <Slider Width="130" Name="Sldr_Speed" Value="0"/>
+    <Grid HorizontalAlignment="Stretch" 
+          VerticalAlignment="Stretch">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Canvas Name="c" 
+                Background="Black" 
+                MouseMove="MouseMove" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch"
+                Grid.Row="0"/>
+        
+        <WrapPanel MouseMove="WrapPanel_MouseMove"
+                   Orientation="Vertical"
+                   Background="#212121"
+                   Grid.Row="1">
+
+            <TextBlock Text="Radius of Bubbles" 
+                       Margin="2"
+                       Foreground="White" 
+                       TextAlignment="Center"/>
+
+            <TextBlock Name="TxtSpeed" 
+                       Text="0" 
+                       Margin="2"
+                       Foreground="White" 
+                       TextAlignment="Center"/>
+            
+            <Slider Name="Sldr_Speed" 
+                    Width="130" 
+                    Value="0"
+                    ValueChanged="Sldr_Speed_ValueChanged"/>
+            
+            
         </WrapPanel>
-    </Canvas>
+    </Grid>
 </Window>
